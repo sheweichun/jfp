@@ -1,0 +1,51 @@
+{
+  "name": "jfp",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/jfp.js",
+  "unpkg": "dist/jfp.umd.js",
+  "module": "dist/jfp.js",
+  "exports": {
+    ".": {
+      "import": "./dist/jfp.js",
+      "require": "./dist/jfp.umd.js"
+    },
+    "./jsx-runtime": {
+      "import": "./jfp-runtime.js",
+      "require": "./jfp-runtime.js"
+    }
+  },
+  "typings": "./dist/types/index.d.ts",
+  "scripts": {
+    "test": "cross-env pw-test test/*.spec.tsx --runner zora --extensions tsx --cov",
+    "report": "npx nyc report",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "dev1": "cd demo && yarn dev",
+    "prepublishOnly": "yarn build"
+  },
+  "description": "",
+  "keywords": [
+    "jfp",
+    "web"
+  ],
+  "author": "weichun.swc",
+  "license": "MIT",
+  "devDependencies": {
+    "codecov": "^3.8.2",
+    "cross-env": "^5.2.0",
+    "nyc": "^15.1.0",
+    "rollup": "^2.11.2",
+    "rollup-plugin-size": "^0.2.2",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "terser": "^4.1.2",
+    "typescript": "^4.0.2",
+    "vite": "^2.7.13",
+    "yarpm": "^0.2.1",
+    "zora": "4.0.2"
+  },
+  "repository": "git@github.com:sheweichun/jfp.git",
+  "homepage": "",
+  "dependencies": {}
+}
