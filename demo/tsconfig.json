@@ -9,8 +9,6 @@
       "removeComments": true,
       "moduleResolution": "node",
       "sourceMap": false,
-      "declaration": true,
-      "declarationDir": "dist/types/",
       "jsx": "react",
       "jsxFactory": "j",
       "jsxFragmentFactory": "Fragment"

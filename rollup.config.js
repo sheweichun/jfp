@@ -9,7 +9,7 @@ const plugins = [
     useTsconfigDeclarationDir: true,
   }),
   terser({
-    include: ['fre.js'],
+    include: ['jfp.js'],
   }),
   size()
 ]
@@ -17,9 +17,9 @@ const plugins = [
 module.exports = {
   input: 'src/index.ts',
   output: [
-    { file: 'dist/fre.umd.js', format: 'umd', name: 'fre', sourcemap: true },
-    { file: 'dist/fre.js', format: 'esm', sourcemap: true },
-    { file: 'dist/fre.esm.js', format: 'esm', sourcemap: true },
+    { file: 'dist/jfp.umd.js', format: 'umd', name: 'jfp', sourcemap: true },
+    { file: 'dist/jfp.js', format: 'esm', sourcemap: true },
+    { file: 'dist/jfp.esm.js', format: 'esm', sourcemap: true },
   ],
   plugins,
 }
