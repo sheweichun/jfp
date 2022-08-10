@@ -392,6 +392,24 @@
     function useEffect(cb, deps) {
         return effectImpl(cb, deps, "effect");
     }
+    function useMemo(cb, deps) {
+        const [hook] = getHook();
+        const { data } = hook;
+        if (isChanged(data[1], deps)) {
+            data[0] = cb();
+            data[1] = deps;
+        }
+        return data[0];
+    }
+    function useCallback(cb, deps) {
+        const [hook] = getHook();
+        const { data } = hook;
+        if (isChanged(data[1], deps)) {
+            data[0] = cb;
+            data[1] = deps;
+        }
+        return data[0];
+    }
     function effectImpl(cb, deps, key) {
         const [hook, current] = getHook();
         const hookData = hook.data;
@@ -423,7 +441,9 @@
     exports.render = render;
     exports.updateRealNode = updateRealNode;
     exports.updateVnode = updateVnode;
+    exports.useCallback = useCallback;
     exports.useEffect = useEffect;
+    exports.useMemo = useMemo;
     exports.useState = useState;
 
     Object.defineProperty(exports, '__esModule', { value: true });

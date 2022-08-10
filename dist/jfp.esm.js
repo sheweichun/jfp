@@ -386,6 +386,24 @@ function isChanged(a, b) {
 function useEffect(cb, deps) {
     return effectImpl(cb, deps, "effect");
 }
+function useMemo(cb, deps) {
+    const [hook] = getHook();
+    const { data } = hook;
+    if (isChanged(data[1], deps)) {
+        data[0] = cb();
+        data[1] = deps;
+    }
+    return data[0];
+}
+function useCallback(cb, deps) {
+    const [hook] = getHook();
+    const { data } = hook;
+    if (isChanged(data[1], deps)) {
+        data[0] = cb;
+        data[1] = deps;
+    }
+    return data[0];
+}
 function effectImpl(cb, deps, key) {
     const [hook, current] = getHook();
     const hookData = hook.data;
@@ -412,5 +430,5 @@ function getHook() {
 
 const j = createElement;
 
-export { Fragment, j, render, updateRealNode, updateVnode, useEffect, useState };
+export { Fragment, j, render, updateRealNode, updateVnode, useCallback, useEffect, useMemo, useState };
 //# sourceMappingURL=jfp.esm.js.map

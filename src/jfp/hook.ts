@@ -10,6 +10,8 @@ export function useState<T>(initState: T): [T, Dispatch<T>]{
     return useReducer(null, initState)
 }
 
+
+
 function useReducer<T, U>(reducer: Reducer<T, U>, initialValue?: T): [T, Dispatch<T>]{
     const [hook, curVnode] = getHook<T, Dispatch<T>>()
     const hookData = hook.data
@@ -38,6 +40,26 @@ function isChanged<T>(a: DependencyList<T>, b: DependencyList<T>){
 
 export function useEffect(cb: EffectCallback, deps?: DependencyList): void{
   return effectImpl(cb, deps!, HookTypes.EFFECT)
+}
+
+export function useMemo<T = any>(cb: ()=>T, deps: DependencyList) : T{
+  const [hook] = getHook<T, DependencyList<T>>()
+  const { data } = hook
+  if(isChanged(data[1], deps)){
+    data[0] = cb()
+    data[1] = deps
+  }
+  return data[0]
+}
+
+export function useCallback<T = Function>(cb: T, deps: DependencyList) : T{
+  const [hook] = getHook<T, DependencyList<T>>()
+  const { data } = hook
+  if(isChanged(data[1], deps)){
+    data[0] = cb
+    data[1] = deps
+  }
+  return data[0]
 }
 
 function effectImpl<T = any>(
